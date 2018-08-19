@@ -1,0 +1,36 @@
+{
+  "name": "extpt-bna",
+  "version": "0.0.1",
+  "description": "Defines the business network for 'extpt'. Business Network Archive can be generated from this repo.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blockchain-sysu/extpt-bna.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blockchain-sysu/extpt-bna/issues"
+  },
+  "homepage": "https://github.com/blockchain-sysu/extpt-bna#readme",
+  "devDependencies": {
+    "composer-admin": "^0.19.12",
+    "composer-cli": "^0.19.12",
+    "composer-client": "^0.19.12",
+    "composer-common": "^0.19.12",
+    "composer-connector-embedded": "^0.19.12",
+    "composer-cucumber-steps": "^0.19.12",
+    "chai": "latest",
+    "chai-as-promised": "latest",
+    "cucumber": "^2.2.0",
+    "nyc": "latest",
+    "mkdirp": "latest",
+    "mocha": "latest"
+  }
+}

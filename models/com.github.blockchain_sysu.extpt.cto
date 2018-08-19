@@ -1,0 +1,17 @@
+namespace com.github.blockchain_sysu.extpt
+
+participant User identified by userId {
+  o String userId
+  o Integer points default=0 range=[0,]
+}
+
+participant Manager extends User {
+}
+
+participant Middleman extends User {
+}
+
+transaction Transfer {
+  o Integer points
+  --> User newOwner
+}
