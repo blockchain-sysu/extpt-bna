@@ -1,17 +1,29 @@
 namespace com.github.blockchain_sysu.extpt
 
-participant User identified by userId {
-  o String userId
+asset Wallet identified by walletId {
+  o String walletId
   o Integer points default=0 range=[0,]
+  --> User user
 }
 
-participant Manager extends User {
+participant User identified by userId {
+  o String userId
+  o Wallet wallet
 }
 
 participant Middleman extends User {
 }
 
+participant Manager extends Middleman {
+}
+
 transaction Transfer {
   o Integer points
-  --> User newOwner
+  --> User from
+  --> User to
+}
+
+transaction Generate {
+  o Integer points
+  --> Manager manager 
 }
