@@ -1,43 +1,8 @@
-rule SystemACL {
-description: "System ACL to permit all access"
-participant: "org.hyperledger.composer.system.Participant"
-operation: ALL
-resource: "org.hyperledger.composer.system.**"
-action: ALLOW
-}
-
 rule NetworkAdminUser {
-description: "Grant business network administrators full access to user resources"
-participant: "org.hyperledger.composer.system.NetworkAdmin"
-operation: ALL
-resource: "**"
-action: ALLOW
-}
-
-rule NetworkAdminSystem {
-description: "Grant business network administrators full access to system resources"
-participant: "org.hyperledger.composer.system.NetworkAdmin"
-operation: ALL
-resource: "org.hyperledger.composer.system.**"
-action: ALLOW
-}
-
-rule CanReadMyOwnWallet {
-  description: "Every user is allowed to read his/her own wallet"
-  participant(m): "com.github.blockchain_sysu.extpt.User"
-  operation: READ
-  resource(v): "com.github.blockchain_sysu.extpt.Wallet"
-  condition: (m.wallet.getIdentifier() == v.getIdentifier())
-  action: ALLOW
-}
-
-rule MiddlemanCanTransfer {
-  description: "Middleman can issue 'Transfer' transaction"
-  participant(m): "com.github.blockchain_sysu.extpt.Middleman"
-  operation: READ, UPDATE
-  resource(v): "com.github.blockchain_sysu.extpt.Wallet"
-  transaction(tx): "com.github.blockchain_sysu.extpt.Transfer"
-  condition: (tx.from.getIdentifier() == m.getIdentifier())
+  description: "Grant business network administrators full access to user resources"
+  participant: "org.hyperledger.composer.system.NetworkAdmin"
+  operation: ALL
+  resource: "**"
   action: ALLOW
 }
 
@@ -47,6 +12,25 @@ rule ManagerCanGenerate {
   operation: ALL
   resource(v): "com.github.blockchain_sysu.extpt.Wallet"
   transaction(tx): "com.github.blockchain_sysu.extpt.Generate"
-  condition: (tx.manager.getIdentifier() == m.getIdentifier())
+  condition: (tx.manager.getIdentifier() === m.getIdentifier())
+  action: ALLOW
+}
+
+rule MiddlemanCanTransfer {
+  description: "Middleman can issue 'Transfer' transaction"
+  participant(m): "com.github.blockchain_sysu.extpt.Middleman"
+  operation: READ, UPDATE
+  resource(v): "com.github.blockchain_sysu.extpt.Wallet"
+  transaction(tx): "com.github.blockchain_sysu.extpt.Transfer"
+  condition: (tx.from.getIdentifier() === m.getIdentifier())
+  action: ALLOW
+}
+
+rule CanReadMyOwnWallet {
+  description: "Every user is allowed to read his/her own wallet"
+  participant(m): "com.github.blockchain_sysu.extpt.User"
+  operation: READ
+  resource(v): "com.github.blockchain_sysu.extpt.Wallet"
+  condition: (m.wallet.getIdentifier() === v.getIdentifier())
   action: ALLOW
 }

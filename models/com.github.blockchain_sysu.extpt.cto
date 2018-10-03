@@ -8,7 +8,7 @@ asset Wallet identified by walletId {
 
 participant User identified by userId {
   o String userId
-  o Wallet wallet
+  --> Wallet wallet
 }
 
 participant Middleman extends User {
@@ -18,7 +18,7 @@ participant Manager extends Middleman {
 }
 
 transaction Transfer {
-  o Integer points
+  o Integer points range=[0,]
   --> User from
   --> User to
 }
@@ -27,3 +27,4 @@ transaction Generate {
   o Integer points
   --> Manager manager 
 }
+  
